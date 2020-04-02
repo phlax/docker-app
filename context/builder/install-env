@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+APP_DIR=$(readlink -f --canonicalize $(eval echo $APP_DIR))
+
+cd $APP_DIR
+
+virtualenv -p /usr/bin/python3 .
+
+if [ ! -z "$EGGS" ]; then
+    echo "Installing eggs: $EGGS in $APP_DIR"
+    . bin/activate \
+	&& pip install --no-cache-dir $EGGS
+fi
+
+
+cd /var/tmp
+export NVM_DIR="$APP_DIR/nvm"
+curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+. $NVM_DIR/nvm.sh
+
+
+if [ ! -z "$APP_ROOT" ]; then
+    echo "Installing app root (in $APP_DIR as $APP_NAME):"
+    cd "$APP_DIR"
+    git clone $APP_ROOT $APP_NAME
+fi
+
+
+
+if [ ! -z "$NPM_PKGS" ]; then
+    echo "Installing npm pkgs (in $APP_SRC_DIR): $NPM_PKGS"
+    cd "$APP_SRC_DIR"
+    npm install $NPM_PKGS
+fi
+
+
+if [ ! -z "$APP_INIT" ]; then
+    echo "Initializing app ($APP_SRC_DIR): $APP_INIT"
+    /usr/local/bin/run_shell $APP_INIT
+fi
