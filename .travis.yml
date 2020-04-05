@@ -8,5 +8,5 @@ before_install:
 
 script:
   - echo "docker build tests..."
-  - docker version
-  - docker-compose version
+  - cd example
+  - make production-image
