@@ -1,0 +1,35 @@
+
+export APP_NAME=app-example
+export APP_USERNAME=app
+export NODE_VERSION=12.0.0
+export APP_ROOT=https://github.com/phlax/docker-app
+export SYSTEM_PKGS="\
+       curl \
+       gettext \
+       git \
+       virtualenv \
+       libjpeg62-turbo \
+       libfreetype6 \
+       liblcms2-2 \
+       libtiff5 \
+       libwebp6 \
+       libxml2 \
+       libxslt1.1 \
+       make \
+       zlib1g"
+export BUILD_PKGS="\
+       build-essential \
+       libjpeg62-turbo-dev \
+       libfreetype6-dev \
+       liblcms2-dev \
+       libtiff5-dev \
+       libwebp-dev \
+       libxml2-dev \
+       libxslt-dev \
+       python3-dev \
+       zlib1g-dev"
+export EGGS="django"
+export NPM_PKGS="react"
+export DEV_PKGS="
+       byobu \
+       emacs25-nox"
