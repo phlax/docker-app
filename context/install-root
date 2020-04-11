@@ -12,6 +12,7 @@ apt-get install \
    --no-install-recommends \
    gosu \
    locales \
+   virtualenv \
    $SYSTEM_PKGS
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
