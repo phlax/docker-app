@@ -2,19 +2,11 @@
 
 set -e
 
-if [ $BUILD_IMAGE = 'dev' ]; then
-    if [ -e $APP_SRC_DIR/dev.conf ]; then
-        echo "Linking dev.conf for this container..."
-        mv /app/xtle.conf /app/xtle.conf.orig
-        ln -sf $APP_SRC_DIR/dev.conf $APP_DIR/xtle.conf
-    fi
-
-    for e in $DEV_EGGS ; do
-	echo "Installing: $e"
+if [ "$BUILD_IMAGE" = 'dev' ]; then
+    for e in "$DEV_EGGS" ; do
 	for d in "$APP_SRC_DIR/$e" ; do
-	    echo "Installing egg: $d"
 	    cd $d
-	    pip install -e .
+	    pip install -qqq -e .
 	done
     done
 fi

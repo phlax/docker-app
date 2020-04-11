@@ -6,18 +6,18 @@ set -e
 
 APP_ID=$(id -u $APP_USERNAME)
 
-echo "user: $LOCAL_USER_ID"
-
 su -c " \
    . $APP_DIR/bin/activate \
    && cd $APP_SRC_DIR \
    && /usr/local/bin/update-container" $APP_USERNAME
 
+if [ ! -z "$ON_CONTAINER_START"  ]; then
+    $ON_CONTAINER_START
+fi
 
-if [ $BUILD_IMAGE = 'dev' ]; then
+if [ "$BUILD_IMAGE" = 'dev' ]; then
     export PYTHONPATH=./src
     if [[ ( ! -z ${LOCAL_USER_ID:+x} ) && ( $LOCAL_USER_ID != "''" ) && ( "$LOCAL_USER_ID" != "$APP_ID" ) ]]; then
-        echo "Starting with UID : $LOCAL_USER_ID";
         usermod -o -u $LOCAL_USER_ID $APP_USERNAME
         chown -R $APP_USERNAME:$APP_USERNAME $APP_DIR/lib $APP_DIR/bin $APP_DIR/share $APP_DIR/include
     fi

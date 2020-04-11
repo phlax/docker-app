@@ -6,5 +6,4 @@
    . $APP_DIR/bin/activate \
    && cd $APP_SRC_DIR \
    && if [ \"$BUILD_IMAGE\" = \"dev\" ]; then export PYTHONPATH=./src; fi \
-   && . $APP_DIR/nvm/nvm.sh \
-   && nvm use node \")"
+   && if [ \"$NPM_PKGS\" ]; then . $APP_DIR/nvm/nvm.sh; nvm use node; fi \")"
