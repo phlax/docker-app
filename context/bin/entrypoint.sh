@@ -3,7 +3,7 @@
 CMD=${@:-$COMMAND}
 
 if [ ! -z "$RUN_AS_ROOT" ]; then
-    exec $CMD
+    exec "$CMD"
 else
     /usr/local/bin/prepare-container
     cd $APP_SRC_DIR
