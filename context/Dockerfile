@@ -51,7 +51,9 @@ RUN rm -rf /tmp/*
 # App stage
 FROM root
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ARG ENTRYPOINT=["/usr/local/bin/entrypoint.sh"]
+
+ENTRYPOINT $ENTRYPOINT
 EXPOSE 8000
 
 ARG APP_USERNAME
