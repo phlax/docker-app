@@ -8,7 +8,8 @@ ARG BUILD_FROM=debian:buster-slim
 # Root stage shared by builder and app images
 FROM $BUILD_FROM as root
 
-MAINTAINER Ryan Northey <ryan@synca.io>
+ARG MAINTAINER="Ryan Northey <ryan@synca.io>"
+MAINTAINER $MAINTAINER
 
 ARG APP_USER_ID=1000
 ARG APP_NAME=
