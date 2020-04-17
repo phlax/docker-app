@@ -11,6 +11,7 @@ apt-get install \
    -y \
    -qq \
    --no-install-recommends \
+   --no-install-suggests \
    gnupg2 \
    gosu \
    locales \
@@ -39,6 +40,7 @@ apt-get install \
    -y \
    -qq \
    --no-install-recommends \
+   --no-install-suggests \
    $SYSTEM_PKGS
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
