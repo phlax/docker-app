@@ -43,8 +43,12 @@ apt-get install \
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
-echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-locale-gen
+if cat /etc/locale.gen | grep "en_US.UTF-8 UTF-8"; then
+    echo "Locale already set"
+else
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    locale-gen
+fi
 update-locale LANG=$LOCALE
 
 if id "$APP_USERNAME" > /dev/null 2>&1; then
