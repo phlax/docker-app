@@ -46,6 +46,10 @@ add_repos () {
 add_keys
 add_repos
 
+
+echo "FFS: install XX${SYSTEM_PKGS}XX"
+
+
 apt update
 apt dist-upgrade -y -qq
 apt install \
