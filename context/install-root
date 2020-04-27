@@ -30,7 +30,9 @@ add_keys () {
     fi
 }
 
+
 add_repos () {
+    local IFS
     if [ ! -z "$DEB_REPOS" ]; then
 	export IFS=";"
 	for repo in $DEB_REPOS; do
