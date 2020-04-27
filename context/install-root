@@ -20,8 +20,8 @@ apt-get install \
    wget
 
 if [ ! -z "$GPG_KEYS" ]; then
-    keys=$(echo $GPG_KEYS | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-    while IFS=" " read -r key; do
+    for key in $GPG_KEYS; do
+	key=$(echo "$key" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 	echo "Adding GPG key: $key"
 	wget -qO - $key | apt-key add -
     done <<< "$keys"
