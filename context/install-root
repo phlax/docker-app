@@ -19,35 +19,39 @@ apt-get install \
    virtualenv \
    wget
 
-if [ ! -z "$GPG_KEYS" ]; then
-    for key in $GPG_KEYS; do
-	key=$(echo "$key" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-	echo "Adding GPG key: $key"
-	wget -qO - $key | apt-key add -
-    done <<< "$keys"
-fi
 
-if [ ! -z "$DEB_REPOS" ]; then
-    export IFS=";"
-    for repo in $DEB_REPOS; do
-	repo=$(echo "$repo" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-	echo "Adding Debian repository: $repo"
-	apt-add-repository "$repo"
-    done
-fi
+add_keys () {
+    if [ ! -z "$GPG_KEYS" ]; then
+	for key in $GPG_KEYS; do
+	    key=$(echo "$key" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+	    echo "Adding GPG key: $key"
+	    wget -qO - $key | apt-key add -
+	done
+    fi
+}
 
-pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed 's/  */ /g')
+add_repos () {
+    if [ ! -z "$DEB_REPOS" ]; then
+	export IFS=";"
+	for repo in $DEB_REPOS; do
+	    repo=$(echo "$repo" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+	    echo "Adding Debian repository: $repo"
+	    apt-add-repository "$repo"
+	done
+    fi
+}
 
-echo "FFS: install XX${pkgs}XX"
+add_keys
+add_repos
 
 apt update
 apt dist-upgrade -y -qq
-apt-get install \
+apt install \
    -y \
    -qq \
    --no-install-recommends \
    --no-install-suggests \
-   $pkgs
+   $SYSTEM_PKGS
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
