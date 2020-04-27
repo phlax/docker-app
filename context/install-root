@@ -46,18 +46,19 @@ add_repos () {
 add_keys
 add_repos
 
+pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:blank:]]*//' -e 's/[[:blank:]]*$//')
 
-echo "FFS: install XX${SYSTEM_PKGS}XX"
-
+echo "FFS: install XX${pkgs}XX"
 
 apt update
-apt dist-upgrade -y -qq
 apt install \
    -y \
    -qq \
    --no-install-recommends \
    --no-install-suggests \
    $SYSTEM_PKGS
+apt dist-upgrade -y -qq
+
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
