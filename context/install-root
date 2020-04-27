@@ -38,6 +38,8 @@ fi
 
 pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed 's/  */ /g')
 
+echo "FFS: install XX${pkgs}XX"
+
 apt update
 apt dist-upgrade -y -qq
 apt-get install \
@@ -45,7 +47,7 @@ apt-get install \
    -qq \
    --no-install-recommends \
    --no-install-suggests \
-   docker-ce criu
+   $pkgs
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
