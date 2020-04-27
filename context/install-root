@@ -45,11 +45,6 @@ add_repos () {
 
 add_keys
 add_repos
-
-pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:blank:]]*//' -e 's/[[:blank:]]*$//')
-
-echo "FFS: install XX${pkgs}XX"
-
 apt update
 apt install \
    -y \
