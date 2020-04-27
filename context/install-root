@@ -36,7 +36,8 @@ if [ ! -z "$DEB_REPOS" ]; then
     done
 fi
 
-pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | tr '\n' '' | tr '  ' ' ')
+echo "SYSTEM PKGS: $SYSTEM_PKGS"
+pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed 's/  */ /g')
 echo "INSTALLING $pkgs"
 
 apt update
