@@ -36,6 +36,10 @@ if [ ! -z "$DEB_REPOS" ]; then
     done
 fi
 
+cat /etc/apt/sources.list
+ls /etc/apt/sources.list.d/
+
+
 apt update -qq
 apt dist-upgrade -y -qq
 apt install \
