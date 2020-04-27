@@ -40,7 +40,7 @@ pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' |
 
 apt update
 apt dist-upgrade -y -qq
-apt install \
+apt-get install \
    -y \
    -qq \
    --no-install-recommends \
