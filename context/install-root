@@ -28,7 +28,7 @@ if [ ! -z "$GPG_KEYS" ]; then
 fi
 
 if [ ! -z "$DEB_REPOS" ]; then
-    repos=$(echo $DEB_REPOS | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+    repos=$(echo -e $DEB_REPOS | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     while IFS= read -r repo; do
 	echo "Adding Debian repository: $repo"
 	apt-add-repository "$repo"
