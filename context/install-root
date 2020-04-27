@@ -29,10 +29,10 @@ fi
 
 if [ ! -z "$DEB_REPOS" ]; then
     repos=$(echo -e $DEB_REPOS | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-    while IFS=";" read -r repo; do
+    while IFS=";" for repo in "$repos"; do
 	echo "Adding Debian repository: $repo"
 	apt-add-repository "$repo"
-    done <<< "$repos"
+    done
 fi
 
 apt-get update -qq
