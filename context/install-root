@@ -36,9 +36,7 @@ if [ ! -z "$DEB_REPOS" ]; then
     done
 fi
 
-echo "SYSTEM PKGS: $SYSTEM_PKGS"
 pkgs=$(echo "$SYSTEM_PKGS" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed 's/  */ /g')
-echo "INSTALLING $pkgs"
 
 apt update
 apt dist-upgrade -y -qq
@@ -47,7 +45,7 @@ apt install \
    -qq \
    --no-install-recommends \
    --no-install-suggests \
-   "$pkgs"
+   $pkgs
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
