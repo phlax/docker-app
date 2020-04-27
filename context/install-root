@@ -39,6 +39,7 @@ fi
 
 apt update
 
+apt install -y -qq docker-ce
 
 apt dist-upgrade -y -qq
 apt install \
