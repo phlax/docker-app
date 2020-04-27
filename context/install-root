@@ -45,7 +45,7 @@ apt-get install \
    -qq \
    --no-install-recommends \
    --no-install-suggests \
-   $pkgs
+   docker-ce criu
 
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
