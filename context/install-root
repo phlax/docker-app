@@ -28,9 +28,9 @@ if [ ! -z "$GPG_KEYS" ]; then
 fi
 
 if [ ! -z "$DEB_REPOS" ]; then
-    repos=$(echo -e $DEB_REPOS | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     export IFS=";"
-    for repo in $repos; do
+    for repo in $DEB_REPOS; do
+	repo=$(echo "$repo" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 	echo "Adding Debian repository: $repo"
 	apt-add-repository "$repo"
     done
