@@ -59,7 +59,6 @@ apt install \
    $SYSTEM_PKGS
 apt dist-upgrade -y -qq
 
-
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 apt-get clean
 if cat /etc/locale.gen | grep "en_US.UTF-8 UTF-8" | grep -v "^\#"; then
