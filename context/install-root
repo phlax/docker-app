@@ -29,7 +29,7 @@ fi
 
 if [ ! -z "$DEB_REPOS" ]; then
     echo "ADDING REPOS"
-    echo $DEB_REPOS
+    echo -e $DEB_REPOS
     while IFS= read -r repo; do
 	echo "Adding Debian repository: $repo"
 	apt-add-repository "$repo"
