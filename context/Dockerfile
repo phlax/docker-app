@@ -56,7 +56,7 @@ ENTRYPOINT []
 # ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 EXPOSE 8000
 
-ARG APP_USERNAME=$APP_USER_ID
+ARG APP_USERNAME=1000
 
 COPY ./install-app /tmp/build/install-app
 COPY ./bin/* /usr/local/bin/
