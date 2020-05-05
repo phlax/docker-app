@@ -64,17 +64,23 @@ else
 fi
 update-locale LANG=$LOCALE
 
-if id "$APP_USERNAME" > /dev/null 2>&1; then
-    echo "User already exists: $APP_USERNAME"
-else
-    useradd \
-	-m \
-	-u $APP_USER_ID \
-	-d /home/$APP_USERNAME \
-	-k /etc/skel \
-	-s /bin/bash \
-	$APP_USERNAME
+if [ -n "$APP_USERNAME" ]; then
+    if id "$APP_USERNAME" > /dev/null 2>&1; then
+	echo "User already exists: $APP_USERNAME"
+    else
+	useradd \
+	    -m \
+	    -u $APP_USER_ID \
+	    -d /home/$APP_USERNAME \
+	    -k /etc/skel \
+	    -s /bin/bash \
+	    $APP_USERNAME
+    fi
 fi
-echo "creating app dir: $APP_DIR"
-mkdir -p "$APP_DIR"
-chown -R $APP_USERNAME:$APP_USERNAME "$APP_DIR"
+if [ -n "$APP_DIR" ]; then
+    echo "creating app dir: $APP_DIR"
+    mkdir -p "$APP_DIR"
+fi
+if [[ -n "$APP_DIR" && -n "$APP_USERNAME" ]]; then
+       chown -R $APP_USERNAME:$APP_USERNAME "$APP_DIR"
+fi
