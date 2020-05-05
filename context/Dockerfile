@@ -45,7 +45,7 @@ ARG NODE_VERSION
 ARG APP_ROOT
 ARG APP_INIT
 ARG BUILD_IMAGE
-RUN su -c "bash /tmp/build/install-env" $APP_USERNAME
+RUN if [ -n "$APP_USERNAME" ];then su -c "bash /tmp/build/install-env" $APP_USERNAME; fi
 RUN rm -rf /tmp/*
 
 
