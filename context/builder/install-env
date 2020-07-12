@@ -28,7 +28,7 @@ if [ ! -z "$APP_ROOT" ]; then
     cd "$APP_DIR"
     git clone $APP_ROOT $APP_NAME
 else
-    mkdir $APP_DIR/$APP_NAME
+    mkdir -p $APP_DIR/$APP_NAME
 fi
 
 
