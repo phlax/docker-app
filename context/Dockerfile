@@ -3,6 +3,10 @@
 # VERSION       0.0.1
 
 ARG BUILD_FROM=debian:buster-slim
+ARG NPM_PKGS
+
+FROM debian:buster-slim as other
+RUN echo "BUILDING WITH NPM PKGS: $NPM_PKGS"
 
 
 # Root stage shared by builder and app images
@@ -19,8 +23,6 @@ ARG SYSTEM_PKGS=
 ARG LOCALE=en_US.UTF-8
 ARG DEB_REPOS=
 ARG GPG_KEYS=
-ARG NPM_PKGS
-RUN echo "BUILDING WITH NPM PKGS: $NPM_PKGS"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     APP_DIR=$APP_DIR \
