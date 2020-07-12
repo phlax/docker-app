@@ -3,11 +3,14 @@
 # VERSION       0.0.1
 
 ARG BUILD_FROM=debian:buster-slim
-ARG NPM_PKGS
 
 FROM debian:buster-slim as other
+ARG NPM_PKGS
+ARG EGGS
 ENV NPM_PKGS=$NPM_PKGS
+ENV EGGS=$EGGS
 RUN echo "BUILDING WITH NPM PKGS: $NPM_PKGS"
+RUN echo "BUILDING WITH EGGS: $EGGS"
 
 
 # Root stage shared by builder and app images
