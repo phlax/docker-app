@@ -6,6 +6,7 @@ ARG BUILD_FROM=debian:buster-slim
 ARG NPM_PKGS
 
 FROM debian:buster-slim as other
+ENV NPM_PKGS=$NPM_PKGS
 RUN echo "BUILDING WITH NPM PKGS: $NPM_PKGS"
 
 
