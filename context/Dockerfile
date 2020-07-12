@@ -4,7 +4,13 @@
 
 ARG BUILD_FROM=debian:buster-slim
 
-FROM debian:buster-slim as other
+
+# Root stage shared by builder and app images
+FROM $BUILD_FROM as root
+
+ARG MAINTAINER="Ryan Northey <ryan@synca.io>"
+MAINTAINER $MAINTAINER
+
 ARG NPM_PKGS
 ARG EGGS
 ENV NPM_PKGS=$NPM_PKGS
@@ -12,12 +18,6 @@ ENV EGGS=$EGGS
 RUN echo "BUILDING WITH NPM PKGS: $NPM_PKGS"
 RUN echo "BUILDING WITH EGGS: $EGGS"
 
-
-# Root stage shared by builder and app images
-FROM $BUILD_FROM as root
-
-ARG MAINTAINER="Ryan Northey <ryan@synca.io>"
-MAINTAINER $MAINTAINER
 
 ARG APP_USER_ID=1000
 ARG APP_NAME=
