@@ -51,6 +51,7 @@ ENV EGGS=$EGGS \
 	APP_ROOT=$APP_ROOT \
 	APP_INIT=$APP_INIT \
 	BUILD_IMAGE=$BUILD_IMAGE
+RUN echo "INSTALLING WITH NPM PKGS: $NPM_PKGS"
 RUN if [ -n "$APP_USERNAME" ];then su -c "bash /tmp/build/install-env" $APP_USERNAME; fi
 RUN rm -rf /tmp/*
 
